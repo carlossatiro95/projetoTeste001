@@ -10,6 +10,11 @@ function App() {
 
   const [listProducts, setListProducts] = useState([]);
 
+  const [message, setMessage] = useState({
+    erro: "",
+    success: "",
+  });
+
   async function searchProducts() {
     try {
       const result = await fetch("http://localhost:3000/products", {
@@ -29,6 +34,14 @@ function App() {
   async function sendForm(e) {
     e.preventDefault();
 
+    if (!product.name || !product.price) {
+      setMessage({
+        erro: "Fill in all the fields!",
+        success: "",
+      });
+      return;
+    }
+
     try {
       const result = await fetch("http://localhost:3000/products", {
         method: "POST",
@@ -39,6 +52,16 @@ function App() {
       const productRegistered = await result.json();
 
       setListProducts([...listProducts, productRegistered]);
+
+      setProduct({
+        name: "",
+        price: "",
+      });
+
+      setMessage({
+        erro: "",
+        success: "Successfully registered!",
+      });
     } catch (error) {}
   }
 
@@ -97,15 +120,31 @@ function App() {
             type="text"
             placeholder="Name"
             value={product.name}
-            onChange={(e) => setProduct({ ...product, name: e.target.value })}
+            onChange={(e) => {
+              (setProduct({ ...product, name: e.target.value }),
+                setMessage({
+                  erro: "",
+                  success: "",
+                }));
+            }}
           />
           <input
             type="number"
             placeholder="Price"
             value={product.price}
-            onChange={(e) => setProduct({ ...product, price: e.target.value })}
+            onChange={(e) => {
+              (setProduct({ ...product, price: e.target.value }),
+                setMessage({
+                  erro: "",
+                  success: "",
+                }));
+            }}
           />
           <button className="button-submit">Register</button>
+          {message.erro && <p className="message-erro">{message.erro}</p>}
+          {message.success && (
+            <p className="message-success">{message.success}</p>
+          )}
         </form>
       </div>
       <div className="box-produtos">
