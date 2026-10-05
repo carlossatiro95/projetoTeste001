@@ -1,4 +1,15 @@
 {
-  "products": [],
+  "products": [
+    {
+      "name": "sofá-cama",
+      "price": "222",
+      "id": "_JmJuKHi-Ng"
+    },
+    {
+      "name": "abajur",
+      "price": "000",
+      "id": "cK0eZjuXEHw"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

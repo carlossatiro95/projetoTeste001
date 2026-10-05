@@ -15,9 +15,9 @@ function App() {
         method: "GET",
       });
 
-      const listUpdated = result.json();
+      const listUpdated = await result.json();
 
-      setListProducts(listProducts);
+      setListProducts(listUpdated);
     } catch (error) {}
   }
 
@@ -35,7 +35,7 @@ function App() {
         body: JSON.stringify(product),
       });
 
-      const productRegistered = result.json();
+      const productRegistered = await result.json();
 
       setListProducts([...listProducts, productRegistered]);
     } catch (error) {}
@@ -61,16 +61,22 @@ function App() {
         </form>
       </div>
       <div className="box-produtos">
-        <div className="produto">
-          <div className="info-produto">
-            <p>Name: </p>
-            <p>Price: </p>
+        {listProducts.map((productMap) => (
+          <div className="produto" key={product.id}>
+            <div className="info-produto">
+              <p>
+                Name: <span>{productMap.name}v</span>
+              </p>
+              <p>
+                Price: <span>{productMap.price}</span>
+              </p>
+            </div>
+            <div className="buttons-action">
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
           </div>
-          <div className="buttons-action">
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

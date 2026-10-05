@@ -93,7 +93,9 @@ input {
   font-size: 20px;
   font-weight: bold;
 }
-
+.info-produto > p > span {
+  color: rgb(204, 221, 50);
+}
 .delete-all {
   display: block;
   margin: auto;
