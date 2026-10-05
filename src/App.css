@@ -96,6 +96,11 @@ input {
 .info-produto > p > span {
   color: rgb(204, 221, 50);
 }
+.input-product {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 .delete-all {
   display: block;
   margin: auto;

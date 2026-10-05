@@ -67,6 +67,27 @@ function App() {
       setListProducts([]);
     } catch (error) {}
   }
+
+  async function editProduct(idProduct, productEdited) {
+    try {
+      const result = await fetch(
+        `http://localhost:3000/products/${idProduct}`,
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(productEdited),
+        },
+      );
+
+      const productUpdated = await result.json();
+
+      setListProducts(
+        listProducts.map((productMap) =>
+          productMap.id === productUpdated.id ? productUpdated : productMap,
+        ),
+      );
+    } catch (error) {}
+  }
   return (
     <div className="container">
       <div className="box-form">
@@ -93,6 +114,7 @@ function App() {
             key={productMap.id}
             product={productMap}
             deleteProduct={deleteProduct}
+            editProduct={editProduct}
           />
         ))}
       </div>
