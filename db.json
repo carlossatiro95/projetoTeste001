@@ -1,14 +1,14 @@
 {
   "products": [
     {
-      "name": "sofá-cama",
-      "price": "222",
-      "id": "_JmJuKHi-Ng"
+      "name": "Mesa",
+      "price": "123",
+      "id": "sntCCrp8RW4"
     },
     {
-      "name": "abajur",
-      "price": "000",
-      "id": "cK0eZjuXEHw"
+      "name": "Cadeira",
+      "price": "456",
+      "id": "TB1ndJTf0RY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
