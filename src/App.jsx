@@ -169,6 +169,7 @@ function App() {
             product={productMap}
             deleteProduct={deleteProduct}
             editProduct={editProduct}
+            darkMode={darkMode}
           />
         ))}
       </div>
