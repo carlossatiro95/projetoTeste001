@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -7,17 +7,37 @@ function App() {
     price: "",
   });
 
+  const [listProducts, setListProducts] = useState([]);
+
+  async function searchProducts() {
+    try {
+      const result = await fetch("http://localhost:3000/products", {
+        method: "GET",
+      });
+
+      const listUpdated = result.json();
+
+      setListProducts(listProducts);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    searchProducts();
+  }, []);
+
   async function sendForm(e) {
     e.preventDefault();
 
     try {
-      const result = await fetch("", {
+      const result = await fetch("http://localhost:3000/products", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(product),
       });
 
       const productRegistered = result.json();
+
+      setListProducts([...listProducts, productRegistered]);
     } catch (error) {}
   }
   return (
