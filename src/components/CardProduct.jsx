@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function cardProduct({ product, deleteProduct, editProduct }) {
+function cardProduct({ product, deleteProduct, editProduct, darkMode }) {
   const [editing, setEditing] = useState(false);
 
   const [productEdited, setProductEdited] = useState({
@@ -14,7 +14,7 @@ function cardProduct({ product, deleteProduct, editProduct }) {
   }
 
   return (
-    <div className="produto">
+    <div className={darkMode ? "produtoDark" : "produto"}>
       {editing ? (
         <div className="input-product">
           <input

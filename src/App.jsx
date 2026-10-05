@@ -3,6 +3,14 @@ import CardProduct from "./components/CardProduct";
 import "./App.css";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(() =>
+    JSON.parse(localStorage.getItem("keyDarkMode")),
+  );
+
+  useEffect(() => {
+    localStorage.setItem("keyDarkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -114,7 +122,14 @@ function App() {
   return (
     <div className="container">
       <div className="box-form">
-        <form onSubmit={sendForm}>
+        <form onSubmit={sendForm} className={darkMode ? "darkMode" : ""}>
+          <button
+            type="button"
+            className="button-darkMode"
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            Theme
+          </button>
           <h1>Registration Product</h1>
           <input
             type="text"
@@ -154,6 +169,7 @@ function App() {
             product={productMap}
             deleteProduct={deleteProduct}
             editProduct={editProduct}
+            darkMode={darkMode}
           />
         ))}
       </div>
