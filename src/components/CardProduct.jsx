@@ -1,4 +1,4 @@
-function cardProduct({ product }) {
+function cardProduct({ product, deleteProduct }) {
   return (
     <div className="produto">
       <div className="info-produto">
@@ -11,7 +11,7 @@ function cardProduct({ product }) {
       </div>
       <div className="buttons-action">
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => deleteProduct(product.id)}>Delete</button>
       </div>
     </div>
   );

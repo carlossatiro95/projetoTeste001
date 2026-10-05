@@ -41,6 +41,32 @@ function App() {
       setListProducts([...listProducts, productRegistered]);
     } catch (error) {}
   }
+
+  async function deleteProduct(idProduct) {
+    try {
+      await fetch(`http://localhost:3000/products/${idProduct}`, {
+        method: "DELETE",
+      });
+
+      setListProducts(
+        listProducts.filter((productFilter) => productFilter.id !== idProduct),
+      );
+    } catch (error) {}
+  }
+
+  async function deleteAll() {
+    try {
+      await Promise.all(
+        listProducts.map((productMap) =>
+          fetch(`http://localhost:3000/products/${productMap.id}`, {
+            method: "DELETE",
+          }),
+        ),
+      );
+
+      setListProducts([]);
+    } catch (error) {}
+  }
   return (
     <div className="container">
       <div className="box-form">
@@ -63,9 +89,18 @@ function App() {
       </div>
       <div className="box-produtos">
         {listProducts.map((productMap) => (
-          <CardProduct key={productMap.id} product={productMap} />
+          <CardProduct
+            key={productMap.id}
+            product={productMap}
+            deleteProduct={deleteProduct}
+          />
         ))}
       </div>
+      {listProducts.length > 0 && (
+        <button className="delete-all" onClick={deleteAll}>
+          Delete-All
+        </button>
+      )}
     </div>
   );
 }
