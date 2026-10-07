@@ -25,7 +25,7 @@ function App() {
 
   async function searchProducts() {
     try {
-      const result = await fetch("http://localhost:3000/products", {
+      const result = await fetch("http://localhost:3001/products", {
         method: "GET",
       });
 
@@ -51,7 +51,9 @@ function App() {
     }
 
     try {
-      const result = await fetch("http://localhost:3000/products", {
+      console.log("Enviando produto:", product);
+
+      const result = await fetch("http://localhost:3001/products", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(product),
@@ -75,7 +77,7 @@ function App() {
 
   async function deleteProduct(idProduct) {
     try {
-      await fetch(`http://localhost:3000/products/${idProduct}`, {
+      await fetch(`http://localhost:3001/products/${idProduct}`, {
         method: "DELETE",
       });
 
@@ -89,7 +91,7 @@ function App() {
     try {
       await Promise.all(
         listProducts.map((productMap) =>
-          fetch(`http://localhost:3000/products/${productMap.id}`, {
+          fetch(`http://localhost:3001/products/${productMap.id}`, {
             method: "DELETE",
           }),
         ),
@@ -102,7 +104,7 @@ function App() {
   async function editProduct(idProduct, productEdited) {
     try {
       const result = await fetch(
-        `http://localhost:3000/products/${idProduct}`,
+        `http://localhost:3001/products/${idProduct}`,
         {
           method: "PATCH",
           headers: { "content-type": "application/json" },
